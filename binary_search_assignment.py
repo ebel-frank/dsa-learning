@@ -80,9 +80,9 @@ def count_rotations(nums):
     while low <= high:
         mid = (low + high) // 2
         mid_num = nums[mid]
-        if mid - 1 >= 0 and nums[mid - 1] > mid_num:
+        if mid - 1 >= 0 and mid_num < nums[mid - 1]:
             return mid
-        elif mid + 1 <= high and nums[mid + 1] > mid_num:
+        elif mid_num < nums[high]:
             high = mid - 1
         else:
             low = mid + 1
@@ -90,11 +90,9 @@ def count_rotations(nums):
 
 
 if __name__ == '__main__':
-    # for i, test in enumerate(tests):
-    #     passed = count_rotations(**test['input']) == test['output']
-    #     if passed:
-    #         print(f"Test {i} Passed")
-    #     else:
-    #         print(f"Test {i} Failed")
-    print(count_rotations(**tests[0]['input']))
-
+    for i, test in enumerate(tests):
+        passed = count_rotations(**test['input']) == test['output']
+        if passed:
+            print(f"Test {i} Passed")
+        else:
+            print(f"Test {i} Failed")
