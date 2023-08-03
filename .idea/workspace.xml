@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a8a097c-ad08-43fe-bde2-ced0d2923e1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/binary_search_assignment_mod.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/binary_search_trees.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/binary_search_assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/binary_search_assignment.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
