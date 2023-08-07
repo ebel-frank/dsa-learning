@@ -18,61 +18,73 @@ class TreeNode:
             return 0
         return 1 + TreeNode.size(self.left) + TreeNode.size(self.right)
 
+    def in_order_traversal(self):
+        if self is None:
+            return []
+        return TreeNode.in_order_traversal(self.left) + [self.key] + TreeNode.in_order_traversal(self.right)
 
-def parse_tuple(data):
-    # print(data)
-    if isinstance(data, tuple) and len(data) == 3:
-        node = TreeNode(data[1])
-        node.left = parse_tuple(data[0])
-        node.right = parse_tuple(data[2])
-    elif data is None:
-        node = None
-    else:
-        node = TreeNode(data)
-    return node
+    def pre_order_traversal(self):
+        if self is None:
+            return []
+        return [self.key] + TreeNode.pre_order_traversal(self.left) + TreeNode.pre_order_traversal(self.right)
 
+    def post_order_traversal(self):
+        if self is None:
+            return []
+        return TreeNode.post_order_traversal(self.left) + TreeNode.post_order_traversal(self.right) + [self.key]
 
-def tree_to_tuple(tree: TreeNode):
-    if tree.left is None and tree.right is None:
-        return tree.key
-    if tree.left is not None:
-        left = tree_to_tuple(tree.left)
-    else:
-        left = None
-    if tree.right is not None:
-        right = tree_to_tuple(tree.right)
-    else:
-        right = None
-    return left, tree.key, right
-
-
-def display_keys(node, space='\t ', level=0):
-    if node is None:
-        print(space * level + '()')
-        return
+    def display_keys(self, space='\t ', level=0):
+        if self is None:
+            print(space * level + '()')
+            return
 
         # If the node is a leaf
-    if node.left is None and node.right is None:
-        print(space * level + str(node.key))
-        return
+        if self.left is None and self.right is None:
+            print(space * level + str(self.key))
+            return
 
         # if the node has children
-    display_keys(node.right, space, level + 1)
-    print(space * level + str(node.key))
-    display_keys(node.left, space, level + 1)
+        TreeNode.display_keys(self.right, space, level + 1)
+        print(space * level + str(self.key))
+        TreeNode.display_keys(self.left, space, level + 1)
 
+    def to_tuple(self):
+        if self is None:
+            return None
+        if self.left is None and self.right is None:
+            return self.key
+        return TreeNode.to_tuple(self.left), tree.key, TreeNode.to_tuple(self.right)
 
-def in_order_traversal(node):
-    if node is None:
-        return []
-    return in_order_traversal(node.left) + [node.key] + in_order_traversal(node.right)
+    def __str__(self):
+        return f"BinaryTree <{self.to_tuple()}>"
+
+    def __repr__(self):
+        return f"BinaryTree <{self.to_tuple()}>"
+
+    @staticmethod
+    def parse_tuple(data):
+        # print(data)
+        if isinstance(data, tuple) and len(data) == 3:
+            node = TreeNode(data[1])
+            node.left = TreeNode.parse_tuple(data[0])
+            node.right = TreeNode.parse_tuple(data[2])
+        elif data is None:
+            node = None
+        else:
+            node = TreeNode(data)
+        return node
 
 
 if __name__ == "__main__":
     tree_tuple = (1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8))
-    tree = parse_tuple(tree_tuple)
-    print(tree.left.key)
-    print(tree.right.key)
-    print(tree_to_tuple(tree))
+    tree = TreeNode.parse_tuple(tree_tuple)
+    print(tree)
     # display_keys(tree)
-    print(in_order_traversal(tree))
+
+    # Depth First Search or DFS
+    # print(tree.in_order_traversal())
+    # print(tree.pre_order_traversal())
+    # print(tree.post_order_traversal())
+
+    print(tree.height())
+    print(tree.size())
